@@ -214,6 +214,7 @@ void Game :: InitScene(vector<string> scenelink)
 	LPCAMERA camera = Camera::GetInstance();
 	camera->Init(backbufferWidth, backbufferHeight);
 
+
 	for (int i = 0; i < scenelink.size(); i++)
 	{
 		Scene temp(scenelink[i]);

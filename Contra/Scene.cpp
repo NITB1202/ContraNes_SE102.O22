@@ -3,7 +3,6 @@
 #include <sstream>
 #include "Player.h"
 
-extern LPPLAYER player;
 //file scene gom co link file map va link file ma tran va link file obj
 
 LPWSTR ConvertStringToLPWSTR(const string& str) 
@@ -35,6 +34,8 @@ Scene::Scene(string path)
 	ss >> state;
 	ss >> camBeginX;
 	ss >> camBeginY;
+
+	LPPLAYER player = Player::GetInstance();
 
 	player->SetPosition(playerBeginX, playerBeginY);
 	player->SetState(state);

@@ -1,5 +1,6 @@
 #include "Player.h"
 #define GROUND 300
+Player* Player ::instance = NULL;
 
 void Player::SetState(int ID)
 {
@@ -200,4 +201,11 @@ bool Player::IsPressed(int key)
 	case DIK_LEFT:
 		return leftPressed;
 	}
+}
+
+Player* Player::GetInstance()
+{
+	if (instance == NULL)
+		instance = new Player();
+	return instance;
 }

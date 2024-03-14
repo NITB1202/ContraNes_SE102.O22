@@ -1,7 +1,6 @@
 #include "KeyEventHandler.h"
 #include "Player.h"
 
-extern Player* player;
 
 void KeyEventHandler::KeyState(BYTE* state)
 {
@@ -11,6 +10,8 @@ void KeyEventHandler::KeyState(BYTE* state)
 	int right = game->IsKeyDown(DIK_RIGHT);
 	int up = game->IsKeyDown(DIK_UP);
 	int down = game->IsKeyDown(DIK_DOWN);
+
+	Player* player = Player::GetInstance();
 	
 	if (player->GetState() == PLAYER_JUMP_UP)
 		return;
@@ -61,6 +62,7 @@ void KeyEventHandler::KeyState(BYTE* state)
 
 void KeyEventHandler::OnKeyDown(int KeyCode)
 {
+	Player* player = Player::GetInstance();
 	switch (KeyCode)
 	{
 	case DIK_A:
@@ -86,6 +88,7 @@ void KeyEventHandler::OnKeyDown(int KeyCode)
 }
 void KeyEventHandler::OnKeyUp(int KeyCode)
 {
+	Player* player = Player::GetInstance();
 	switch (KeyCode)
 	{
 	case DIK_RIGHT:
