@@ -3,6 +3,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "AnimationLib.h"
+#include "Turret.h"
 
 #define WINDOW_TITLE L"Contra"
 #define WINDOW_CLASS_NAME L"MainWindow"
@@ -23,6 +24,7 @@ void Render();
 void Update(DWORD dt);
 
 vector<string> scenelink;
+
 
 string GetPath()
 {
@@ -56,6 +58,7 @@ LRESULT CALLBACK WinProc(HWND hwnd, UINT msg, WPARAM wParam, LPARAM lParam)
 void LoadResource()
 {
 	Game* game = Game::GetInstance();
+
 	LPTEXTURE tex;
 	AnimationLib* aniLib = AnimationLib::GetInstance();
 
@@ -80,6 +83,48 @@ void LoadResource()
 	tex = game->LoadTexture(TEXTURE_PATH_PLAYER_JUMP_UP);
 	aniLib->AddAnimation(PLAYER_JUMP_UP, Animation(tex, PLAYER_JUMP_WIDTH, PLAYER_JUMP_HEIGHT, 1.5, 1.5));
 
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_CLOSE);
+	aniLib->AddAnimation(TURRET_CLOSE_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_OPENING);
+	aniLib->AddAnimation(TURRET_OPENING_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_0);
+	aniLib->AddAnimation(TURRET_0_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_30);
+	aniLib->AddAnimation(TURRET_30_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_60);
+	aniLib->AddAnimation(TURRET_60_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_90);
+	aniLib->AddAnimation(TURRET_90_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_120);
+	aniLib->AddAnimation(TURRET_120_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_150);
+	aniLib->AddAnimation(TURRET_150_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_180);
+	aniLib->AddAnimation(TURRET_180_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_n150);
+	aniLib->AddAnimation(TURRET_n150_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_n120);
+	aniLib->AddAnimation(TURRET_n120_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_n90);
+	aniLib->AddAnimation(TURRET_n90_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_n60);
+	aniLib->AddAnimation(TURRET_n60_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
+	tex = game->LoadTexture(TEXTURE_PATH_TURRET_n30);
+	aniLib->AddAnimation(TURRET_n30_ANIMATION, Animation(tex, TURRET_SPRITE_WIDTH, TURRET_SPRITE_HEIGHT, 1.5, 1.5));
+
 	string scene0 = GetPath() + PATH_SCENE_0;
 	
 	scenelink.push_back(scene0);
@@ -91,6 +136,7 @@ void Update(DWORD dt)
 	Game::GetInstance()->GetCurrentScene().Update();
 	Camera::GetInstance()->UpdateByX(dt);
 	Player::GetInstance()->Update(dt);
+	
 }
 
 /*
@@ -117,7 +163,9 @@ void Render()
 		pD3DDevice->OMSetBlendState(game->GetAlphaBlending(), NewBlendFactor, 0xffffffff);
 
 		game->GetCurrentScene().Render();
+		
 		Player::GetInstance()->Render();
+		
 		spriteHandler->End();
 		pSwapChain->Present(0, 0);
 	}
